@@ -29,7 +29,8 @@
           "options": {
             "main": "projects/criteria/src/test.ts",
             "tsConfig": "projects/criteria/tsconfig.spec.json",
-            "karmaConfig": "projects/criteria/karma.conf.js"
+            "karmaConfig": "projects/criteria/karma.conf.js",
+            "codeCoverage": true
           }
         },
         "lint": {

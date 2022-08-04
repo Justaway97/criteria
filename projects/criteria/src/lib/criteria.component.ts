@@ -85,35 +85,17 @@ export class CriteriaComponent implements OnInit {
     this.createCriteria.key[key] = value;
   }
 
-  alterCreateCriterias(criteria: any[]) {
-    Object.entries(criteria).forEach(([key, value]) => {
-      this.createCriteria.key[key] = value as string;
-    })
-  }
-
-  alterReadCriteria(type: 'where' | 'orderBy' | 'rowFrom' | 'rowTo', key: string, value: any) {
-    if (type == 'orderBy') {
-      this.readCriteria[type][key] = value;
+  alterReadCriteria(type: 'where' | 'orderBy' | 'rowFrom' | 'rowTo', key?: string, value?: any) {
+    if (type == 'orderBy' && key) {
+      this.readCriteria.orderBy[key] = value;
     } else if (type == 'where') {
       this.readCriteria.where = value;
-    } else {
+    } else if ((type == 'rowFrom' || type == 'rowTo')) {
       this.readCriteria[type] = value as unknown as number;
     }
   }
 
-  alterReadCriterias(type: 'where' | 'orderBy' | 'rowFrom' | 'rowTo', criteria: any[]) {
-    Object.entries(criteria).forEach(([key, value]) => {
-      if (type == 'orderBy') {
-        this.readCriteria[type][key] = value as string;
-      } else if (type == 'where') {
-        this.readCriteria.where = value;
-      } else {
-        this.readCriteria[type] = value as unknown as number;
-      }
-    })
-  }
-
-  alterUpdateCriteria(type: 'key' | 'where', key: string, value: string) {
+  alterUpdateCriteria(type: 'key' | 'where', key: string, value: any) {
     if (type == 'key') {
       this.updateCriteria[type][key] = value;
     } else {
@@ -121,23 +103,8 @@ export class CriteriaComponent implements OnInit {
     }
   }
 
-  alterUpdateCriterias(type: 'key' | 'where', criteria: any[]) {
-    Object.entries(criteria).forEach(([key, value]) => {
-      if (type == 'key') {
-        this.updateCriteria[type][key] = value as string;
-      } else {
-        this.updateCriteria.where = value;
-      }
-    })
+  alterDeleteCriteria(value: any) {
+    this.deleteCriteria.where = value;
   }
 
-  alterDeleteCriteria(key: string, value: string) {
-    this.updateCriteria.where[key] = value;
-  }
-
-  alterDeleteCriterias(criteria: any[]) {
-    Object.entries(criteria).forEach(([key, value]) => {
-      this.updateCriteria.where[key] = value as string;
-    })
-  }
 }
